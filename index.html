@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="/your-path-to-fontawesome/css/fontawesome.css"
+      rel="stylesheet"
+    />
+    <link href="/your-path-to-fontawesome/css/brands.css" rel="stylesheet" />
+    <link href="/your-path-to-fontawesome/css/solid.css" rel="stylesheet" />
+    <title>Netflix</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        color: white;
+      }
+      .signin-btn {
+        background-color: red;
+        border-radius: 4px;
+        color: white;
+        margin-right: 20px;
+        border: none;
+        font-weight: 300;
+        padding: 8px 13px;
+      }
+      .lang-btn {
+        background-color: rgba(39, 42, 51, 0.7);
+        color: white;
+        border: 1px solid rgb(255, 255, 255);
+        border-radius: 4px;
+        padding: 8px 30px;
+        margin-right: 10px;
+      }
+      .navbar {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 20px;
+        position: relative;
+        z-index: 3;
+        margin-top: -180px;
+      }
+      .logo-img {
+        width: 200px;
+        height: 150px;
+        margin-right: auto;
+        margin-left: 100px;
+      }
+      .navbar-buttons {
+        display: flex;
+        align-items: center;
+      }
+      .main {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+        font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+          sans-serif;
+      }
+      .main::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("./images/netflix-front.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: 1;
+      }
+      .overlay {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 2;
+      }
+      .main-content {
+        position: relative;
+        z-index: 3;
+        color: white;
+        text-align: center;
+        padding-top: 20vh;
+      }
+      .main-content h1 {
+        font-size: 4em;
+        font-weight: bold;
+      }
+      .main-content p {
+        font-size: 1.3em;
+      }
+      .email-input {
+        padding: 1.5rem 0.5rem 0.5rem;
+        margin-right: 10px;
+        border-radius: 4px;
+        border: 1px solid rgb(255, 255, 255);
+        background-color: rgba(45, 51, 58, 0.5);
+        color: white;
+        width: 270px;
+      }
+      .get-started-btn {
+        padding: 10px 20px;
+        background-color: red;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1em;
+        height: 50px;
+      }
+
+      .email-bar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .main-para {
+        margin-top: 100px;
+      }
+      .content-2 {
+        font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+          sans-serif;
+        margin-left: 150px;
+        margin-right: 150px;
+        padding: 30px;
+        position: relative;
+        z-index: 2;
+        top: -130px;
+      }
+      .dropdown > select {
+        padding: 10px;
+        border-radius: 3px;
+        background-color: black;
+        color: white;
+        font-size: medium;
+        font-weight: 500;
+      }
+
+      .dropdown {
+        font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+          sans-serif;
+      }
+      .curve {
+        width: 100%;
+        top: -130px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        clip-path: ellipse(50% 30% at 50% -15%);
+        background: linear-gradient(
+          to right,
+          rgba(33, 13, 22, 1) 16%,
+          rgba(184, 40, 105, 1),
+          rgba(229, 9, 20, 1),
+          rgba(184, 40, 105, 1),
+          rgba(33, 13, 22, 1) 84%
+        );
+        height: 130px;
+        border-top: 1px solid;
+        position: relative;
+        z-index: 2;
+        transform: scaleY(-1);
+      }
+
+      .curve::before {
+        content: "";
+        position: absolute;
+        top: -80px;
+        left: 0;
+        right: 0;
+        height: 180px;
+        background: linear-gradient(
+          to right,
+          rgba(33, 13, 22, 1) 16%,
+          rgba(184, 40, 105, 1),
+          rgba(229, 9, 20, 1),
+          rgba(184, 40, 105, 1),
+          rgba(33, 13, 22, 1) 84%
+        );
+        clip-path: ellipse(40% 30% at 50% 100%);
+      }
+      .section-2 {
+        background-color: black;
+      }
+      .scroller {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-60%);
+        font-size: 2em;
+        cursor: pointer;
+        z-index: 3;
+        background-color: rgb(61, 58, 58);
+        height: 100px;
+        width: 25px;
+        border-radius: 6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .scroller:hover {
+        background-color: rgb(91, 86, 86);
+      }
+      .scroller-left {
+        right: 20px;
+        left: 10px;
+        color: white;
+      }
+
+      .scroller-right {
+        right: 10px;
+        color: white;
+      }
+
+      .wrapper {
+        overflow-x: hidden;
+        display: flex;
+        align-items: center;
+        padding: 80px;
+        scroll-behavior: smooth;
+        padding-top: 0;
+      }
+
+      .list {
+        display: flex;
+        padding: 0;
+        list-style: none;
+        margin: 0;
+      }
+
+      .list > li {
+        flex: 0 0 auto;
+      }
+
+      .card-img-top {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        transition: transform 0.3s ease-in-out;
+      }
+      .card {
+        width: 10rem;
+        height: 10rem;
+      }
+      .card:hover .card-img-top {
+        transform: scale(1.1);
+      }
+
+      .container {
+        top: -100px;
+      }
+      .wrapper::-webkit-scrollbar {
+        display: none;
+      }
+      .wrapper > img :hover {
+        size: 18rem;
+        cursor: pointer;
+      }
+      /* reasons css */
+      .reasons-more {
+        font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+          sans-serif;
+        margin-left: 150px;
+        margin-right: 150px;
+        padding: 30px;
+        position: relative;
+        z-index: 2;
+        top: -90px;
+        color: white;
+      }
+
+      .card-color {
+        background: linear-gradient(149deg, #192247 0%, #210e17 96.86%);
+        color: white;
+      }
+      .reasons-more .card {
+        width: 100%;
+        height: auto;
+      }
+      .reasons-more .card p {
+        padding: 15px;
+      }
+      .reasons-more .card-body {
+        padding: 15px;
+      }
+      .content-2 > div > p {
+        font-size: 2em;
+      }
+      .reasons-more > div > p {
+        font-size: 2em;
+        margin-bottom: 20px;
+      }
+      /* FAQ */
+      .faq {
+        font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+          sans-serif;
+        margin-left: 150px;
+        margin-right: 150px;
+        padding: 30px;
+        position: relative;
+        z-index: 2;
+        top: -90px;
+        color: white;
+      }
+      .accordion {
+        margin: 60px auto;
+        width: 100%;
+        max-width: 1700px;
+      }
+      .accordion li {
+        list-style: none;
+        width: 100%;
+        padding: 5px;
+      }
+      .accordion li label {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        font-size: 18px;
+        font-weight: 500;
+        background: #303030;
+        margin-bottom: 2px;
+        cursor: pointer;
+        position: relative;
+      }
+      label::after {
+        content: "+";
+        font-size: 34px;
+        position: absolute;
+        right: 20px;
+        transition: transform 0.5s;
+      }
+      input[type="radio"] {
+        display: none;
+      }
+      .accordion .content {
+        background: #303030;
+        text-align: left;
+        padding: 0 20px;
+        max-height: 0;
+        overflow: hidden;
+        transform: max-height 0.5s, padding 0.5s;
+      }
+      .accordion input[type="radio"]:checked + label + .content {
+        max-height: 600px;
+        padding: 30px 20px;
+      }
+      .accordion input[type="radio"]:checked + label::after {
+        transform: rotate(135deg);
+      }
+      .last-email small {
+        font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+          sans-serif;
+        margin-left: 500px;
+        margin-right: 200px;
+        padding: 30px;
+        position: relative;
+        z-index: 2;
+        top: -40px;
+        color: white;
+        font-size: 1.3em;
+      }
+      /* footer */
+      footer {
+        padding: 20px 80px;
+        color: white;
+        font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu,
+          sans-serif;
+        background: black;
+        margin-top: 20px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .footer-cols {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .footer-cols > * {
+        flex: 1 1 200px;
+      }
+
+      .footer-cols a {
+        color: gray;
+        text-decoration: none;
+      }
+
+      .footer-cols a:hover {
+        text-decoration: underline;
+      }
+
+      footer > div:first-child {
+        margin-bottom: 20px;
+      }
+
+      .footer-dropdown {
+        border-radius: 3px;
+        padding: 10px;
+        background-color: black;
+        border: 1px solid gray;
+        color: white;
+        font-size: medium;
+        font-weight: 500;
+      }
+
+      .faq small {
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="overlay"></div>
+      <div class="main-content">
+        <div class="navbar">
+          <img class="logo-img" src="./images/logo-removebg-preview.png" />
+          <div class="navbar-buttons">
+            <select class="lang-btn" name="lang" id="lang">
+              <option value="English">English</option>
+              <option value="Hindi">हिन्दी</option>
+            </select>
+            <button class="signin-btn">Sign In</button>
+          </div>
+        </div>
+        <div class="main-para">
+          <h1>
+            Unlimited movies,<br />
+            TV shows and more
+          </h1>
+          <p>Starts at ₹149. Cancel at any time.</p>
+          <p>
+            Ready to watch? Enter your email to create or restart your
+            membership.
+          </p>
+          <div class="email-bar">
+            <input
+              class="email-input"
+              type="email"
+              placeholder="Email address"
+            />
+            <button class="get-started-btn">Get Started</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Section 2 -->
+    <div class="section-2">
+      <div class="curve"></div>
+      <div class="content-2">
+        <p style="font-size: 28px; font-weight: 500; color: white">
+          Trending Now
+        </p>
+        <div class="dropdown">
+          <select style="margin-right: 23px">
+            <option>India</option>
+            <option>Global</option>
+          </select>
+          <select>
+            <option>Movies</option>
+            <option>TV Shows</option>
+          </select>
+        </div>
+      </div>
+      <div class="container position-relative">
+        <div class="scroller scroller-left">&lsaquo;</div>
+        <div class="scroller scroller-right">&rsaquo;</div>
+        <div class="wrapper" id="nav-scroll">
+          <ul class="list">
+            <li class="active">
+              <div class="card m-3" style="width: 13rem; height: 13rem">
+                <img
+                  src="./images/img-1.webp"
+                  class="card-img-top"
+                  alt="Image 1"
+                  style="border: 1px solid white; border-radius: 5px"
+                />
+              </div>
+            </li>
+            <li>
+              <div class="card m-3" style="width: 13rem; height: 13rem">
+                <img
+                  src="./images/img-2.webp"
+                  class="card-img-top"
+                  alt="Image 2"
+                  style="border: 1px solid white; border-radius: 5px"
+                />
+              </div>
+            </li>
+            <li>
+              <div class="card m-3" style="width: 13rem; height: 13rem">
+                <img
+                  src="./images/img-3.webp"
+                  class="card-img-top"
+                  alt="Image 3"
+                  style="border: 1px solid white; border-radius: 5px"
+                />
+              </div>
+            </li>
+            <li>
+              <div class="card m-3" style="width: 13rem; height: 13rem">
+                <img
+                  src="./images/img-4.webp"
+                  class="card-img-top"
+                  alt="Image 4"
+                  style="border: 1px solid white; border-radius: 5px"
+                />
+              </div>
+            </li>
+            <li>
+              <div class="card m-3" style="width: 13rem; height: 13rem">
+                <img
+                  src="./images/img-5.webp"
+                  class="card-img-top"
+                  alt="Image 5"
+                  style="border: 1px solid white; border-radius: 5px"
+                />
+              </div>
+            </li>
+            <li>
+              <div class="card m-3" style="width: 13rem; height: 13rem">
+                <img
+                  src="./images/img-6.webp"
+                  class="card-img-top"
+                  alt="Image 6"
+                  style="border: 1px solid white; border-radius: 5px"
+                />
+              </div>
+            </li>
+            <li>
+              <div class="card m-3" style="width: 13rem; height: 13rem">
+                <img
+                  src="./images/img-7.webp"
+                  class="card-img-top"
+                  alt="Image 7"
+                  style="border: 1px solid white; border-radius: 5px"
+                />
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- More reasons to join -->
+      <div class="reasons-more">
+        <p style="font-size: 28px; font-weight: 500; color: white">
+          More reasons to join
+        </p>
+        <div class="row row-cols-1 row-cols-md-1 row-cols-lg-4 g-4">
+          <div class="col">
+            <div class="card card-color m-3" style="height: 18rem">
+              <div class="card-body">
+                <h5 class="card-title">Enjoy on your TV</h5>
+                <p class="card-text">
+                  Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV,
+                  Blu-ray players and more.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card card-color m-3" style="height: 18rem">
+              <div class="card-body">
+                <h5 class="card-title">Download your shows to watch offline</h5>
+                <p class="card-text">
+                  Save your favourites easily and always have something to
+                  watch.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card card-color m-3" style="height: 18rem">
+              <div class="card-body">
+                <h5 class="card-title">Watch everywhere</h5>
+                <p class="card-text">
+                  Stream unlimited movies and TV shows on your phone, tablet,
+                  laptop and TV.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card card-color m-3" style="height: 18rem">
+              <div class="card-body">
+                <h5 class="card-title">Create profiles for kids</h5>
+                <p class="card-text">
+                  Send kids on adventures with their favourite characters in a
+                  space made just for them — free with your membership.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Frequently asked question  -->
+      <div class="faq">
+        <p style="font-size: 28px; font-weight: 500; color: white">
+          Frequently Asked Questions
+        </p>
+        <ul class="accordion">
+          <li>
+            <input type="radio" name="accordion" id="first" />
+            <label for="first">What is Netflix</label>
+            <div class="content">
+              <p>
+                Netflix is a streaming service that offers a wide variety of
+                award-winning TV shows, movies, anime, documentaries and more –
+                on thousands of internet-connected devices.
+              </p>
+            </div>
+          </li>
+          <li>
+            <input type="radio" name="accordion" id="second" />
+            <label for="second">How much does Netflix cost?</label>
+            <div class="content">
+              <p>
+                Netflix is a streaming service that offers a wide variety of
+                award-winning TV shows, movies, anime, documentaries and more –
+                on thousands of internet-connected devices.
+              </p>
+            </div>
+          </li>
+          <li>
+            <input type="radio" name="accordion" id="third" />
+            <label for="third">Where can I watch?</label>
+            <div class="content">
+              <p>
+                Netflix is a streaming service that offers a wide variety of
+                award-winning TV shows, movies, anime, documentaries and more –
+                on thousands of internet-connected devices.
+              </p>
+            </div>
+          </li>
+          <li>
+            <input type="radio" name="accordion" id="fourth" />
+            <label for="fourth">How can I cancel?</label>
+            <div class="content">
+              <p>
+                Netflix is a streaming service that offers a wide variety of
+                award-winning TV shows, movies, anime, documentaries and more –
+                on thousands of internet-connected devices.
+              </p>
+            </div>
+          </li>
+          <li>
+            <input type="radio" name="accordion" id="fifth" />
+            <label for="fifth">What can I watch on Netflix?</label>
+            <div class="content">
+              <p>
+                Netflix is a streaming service that offers a wide variety of
+                award-winning TV shows, movies, anime, documentaries and more –
+                on thousands of internet-connected devices.
+              </p>
+            </div>
+          </li>
+          <li>
+            <input type="radio" name="accordion" id="sixth" />
+            <label for="sixth">Is Netflix good for kids?</label>
+            <div class="content">
+              <p>
+                Netflix is a streaming service that offers a wide variety of
+                award-winning TV shows, movies, anime, documentaries and more –
+                on thousands of internet-connected devices.
+              </p>
+            </div>
+          </li>
+        </ul>
+        <small
+          >Ready to watch? Enter your email to create or restart your
+          membership.</small
+        >
+        <div class="email-bar">
+          <input class="email-input" type="email" placeholder="Email address" />
+          <button class="get-started-btn">Get Started</button>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+        <div>Questions? Call <a href="">1-800-000-0000</a></div>
+        <div class="footer-cols">
+          <a href="#">FAQ</a>
+          <a href="#">Help Center</a>
+          <a href="#">Account</a>
+          <a href="#">Media Center</a>
+          <a href="#">Investor Relations</a>
+          <a href="#">Jobs</a>
+          <a href="#">Ways to Watch</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Privacy</a>
+          <a href="#">Cookie Preferences</a>
+          <a href="#">Corporate Information</a>
+          <a href="#">Contact Us</a>
+          <a href="#">Speed Test</a>
+          <a href="#">Legal Notices</a>
+          <a href="#">Only on Netflix</a>
+        </div>
+        <div style="margin-top: 50px">
+          <select class="footer-dropdown" name="lang" id="lang">
+            <option value="English">English</option>
+            <option value="Hindi">हिन्दी</option>
+          </select>
+          <p style="margin-top: 50px">Netflix India</p>
+        </div>
+      </footer>
+    </div>
+    <script>
+      const scrollerLeft = document.querySelector(".scroller-left");
+      const scrollerRight = document.querySelector(".scroller-right");
+      const wrapper = document.querySelector(".wrapper");
+
+      scrollerLeft.addEventListener("click", () => {
+        wrapper.scrollBy({
+          left: -300,
+          behavior: "smooth",
+        });
+      });
+
+      scrollerRight.addEventListener("click", () => {
+        wrapper.scrollBy({
+          left: 300,
+          behavior: "smooth",
+        });
+      });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz4fnFO9gybV7raY7mTmFI06j3zEiA5w/uHfA2/j/Oz1p1t+Vo/7ZEZDyx"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+      integrity="sha384-qHK6aTSOihS/hG6PAaW6CYP6+6AKWPLs2e92xRj6ayVv2LTTb2G5t2QUz0H9drA7"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
